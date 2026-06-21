@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pangkalan Dazam — Gas LPG 3 Kg Pekanbaru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F2A43;
+    --blue:#1C5DA6;
+    --blue-deep:#123E73;
+    --green:#2E7D4F;
+    --green-deep:#1F5C39;
+    --amber:#F4A227;
+    --red:#D6483F;
+    --paper:#FBF6EA;
+    --paper-dim:#F1E9D8;
+    --white:#FFFCF6;
+    --line: rgba(15,42,67,0.12);
+    --shadow: 0 18px 40px -18px rgba(15,42,67,0.35);
+    --radius: 18px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:12.5px;
+    color:var(--blue-deep);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 0 4px rgba(214,72,63,.18);
+  }
+  h1,h2,h3{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    line-height:.98;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    padding:15px 26px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform .25s cubic-bezier(.2,.9,.3,1.3), box-shadow .25s ease;
+  }
+  .btn-primary{
+    background:var(--green);
+    color:var(--white);
+    box-shadow:0 14px 30px -10px rgba(46,125,79,.55);
+  }
+  .btn-primary:hover{ transform:translateY(-3px) scale(1.02); box-shadow:0 18px 34px -8px rgba(46,125,79,.6);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink);
+    border:2px solid var(--ink);
+  }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); transform:translateY(-3px);}
+  .btn svg{ width:19px; height:19px; flex-shrink:0;}
+
+  /* ---------- progress bar ---------- */
+  #scrollbar{
+    position:fixed; top:0; left:0; height:4px; width:0%;
+    background:linear-gradient(90deg,var(--green),var(--amber));
+    z-index:999; transition:width .08s linear;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:90;
+    padding:18px 0;
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  header.scrolled{
+    background:rgba(251,246,234,.88);
+    backdrop-filter:blur(14px);
+    box-shadow:0 8px 24px -16px rgba(15,42,67,.4);
+    padding:11px 0;
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    display:flex; align-items:center; gap:11px;
+    font-family:'Anton', sans-serif;
+    font-size:21px;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  .logo .tank-icon{ width:30px; height:30px;}
+  .nav-links{ display:flex; gap:34px; font-weight:600; font-size:14.5px;}
+  .nav-links a{ position:relative; padding:4px 0;}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px;
+    background:var(--green); transition:width .3s ease;
+  }
+  .nav-links a:hover::after{ width:100%;}
+  .nav-cta{ display:flex; align-items:center; gap:18px;}
+  .nav-cta .btn{ padding:11px 20px; font-size:14px;}
+  .burger{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:168px 0 90px;
+    overflow:hidden;
+  }
+  .hero-blob{
+    position:absolute; border-radius:50%; filter:blur(70px); opacity:.35; z-index:0;
+  }
+  .blob-a{ width:420px; height:420px; background:var(--blue); top:-140px; right:-120px; animation:float-a 11s ease-in-out infinite;}
+  .blob-b{ width:360px; height:360px; background:var(--amber); bottom:-160px; left:-100px; opacity:.3; animation:float-b 13s ease-in-out infinite;}
+  @keyframes float-a{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(-30px,40px);} }
+  @keyframes float-b{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(40px,-25px);} }
+
+  .hero-grid{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1.05fr .95fr; gap:50px; align-items:center;
+  }
+  .hero-copy h1{
+    font-size:clamp(46px, 6.6vw, 84px);
+    margin:18px 0 22px;
+    color:var(--ink);
+  }
+  .hero-copy h1 span{ color:var(--green); }
+  .hero-copy p.lead{
+    font-size:18px; line-height:1.65; color:#3A4D5F; max-width:480px; margin-bottom:32px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:34px;}
+  .hero-meta{
+    display:flex; gap:28px; flex-wrap:wrap;
+  }
+  .hero-meta div{ display:flex; gap:10px; align-items:flex-start; font-size:13.5px; color:#3A4D5F; max-width:220px;}
+  .hero-meta svg{ width:20px; height:20px; flex-shrink:0; color:var(--blue); margin-top:1px;}
+  .hero-meta strong{ display:block; font-size:14px; color:var(--ink); font-weight:700;}
+
+  .hero-visual{ position:relative; display:flex; justify-content:center;}
+  .badge-resmi{
+    position:absolute; top:8%; right:2%;
+    background:var(--blue); color:white; border-radius:50%;
+    width:118px; height:118px; display:flex; align-items:center; justify-content:center;
+    text-align:center; font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:700;
+    letter-spacing:.04em; line-height:1.4; box-shadow:var(--shadow);
+    animation: spin-slow 18s linear infinite;
+    border:3px dashed rgba(255,255,255,.5);
+  }
+  @keyframes spin-slow{ to{ transform:rotate(360deg);} }
+  .tank-float{ animation: bob 4.5s ease-in-out infinite; filter:drop-shadow(0 30px 30px rgba(15,42,67,.25));}
+  @keyframes bob{ 0%,100%{ transform:translateY(0px) rotate(-1.5deg);} 50%{ transform:translateY(-18px) rotate(1.5deg);} }
+
+  /* ---------- corrugated divider (signature motif) ---------- */
+  .zig{
+    width:100%; height:46px; display:block;
+  }
+
+  /* ---------- reveal animation engine ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(46px);
+    transition:opacity .8s cubic-bezier(.16,.84,.34,1), transform .8s cubic-bezier(.16,.84,.34,1);
+  }
+  .reveal.left{ transform:translateX(-60px); }
+  .reveal.right{ transform:translateX(60px); }
+  .reveal.scale{ transform:scale(.85); }
+  .reveal.in-view{ opacity:1; transform:translate(0,0) scale(1); }
+  .stagger > * { transition-delay: calc(var(--i) * 90ms); }
+
+  /* ---------- section shells ---------- */
+  section{ position:relative; padding:108px 0; }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(34px,4.4vw,52px); margin-top:14px; }
+  .section-head p{ font-size:16.5px; color:#3A4D5F; margin-top:16px; line-height:1.6; }
+
+  .section-dark{ background:var(--ink); color:var(--paper); }
+  .section-dark .section-head p{ color:#B9C8D6; }
+
+  /* ---------- about cards ---------- */
+  .feature-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .feature-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    transition:transform .35s cubic-bezier(.2,.85,.3,1.2), box-shadow .35s ease, border-color .35s ease;
+  }
+  .feature-card:hover{ transform:translateY(-8px); box-shadow:var(--shadow); border-color:transparent; }
+  .feature-card .ic{
+    width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px; background:var(--paper-dim);
+  }
+  .feature-card .ic svg{ width:26px; height:26px; color:var(--green); }
+  .feature-card h3{ font-family:'Plus Jakarta Sans'; text-transform:none; font-weight:800; font-size:18.5px; letter-spacing:0; margin-bottom:9px;}
+  .feature-card p{ font-size:14.5px; color:#56697A; line-height:1.6;}
+
+  /* ---------- product ---------- */
+  .product-wrap{
+    display:grid; grid-template-columns:.85fr 1.15fr; gap:60px; align-items:center;
+  }
+  .product-visual{ position:relative; display:flex; justify-content:center;}
+  .flame-wrap{ position:absolute; bottom:6%; left:50%; transform:translateX(-50%); width:60px; }
+  .price-tag{
+    position:absolute; top:6%; left:0;
+    background:var(--amber); color:var(--ink); padding:14px 18px; border-radius:14px;
+    font-weight:800; font-size:13.5px; box-shadow:var(--shadow);
+    transform:rotate(-7deg);
+  }
+  .price-tag small{ display:block; font-weight:600; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;}
+
+  .product-info .eyebrow{ margin-bottom:16px;}
+  .product-info h2{ font-size:clamp(32px,4.2vw,46px); margin-bottom:18px;}
+  .product-info p.desc{ font-size:16px; color:#3A4D5F; line-height:1.7; margin-bottom:28px; max-width:520px;}
+  .spec-list{ display:grid; gap:14px; margin-bottom:32px;}
+  .spec-list li{
+    display:flex; gap:14px; align-items:flex-start; font-size:15px; color:#2A3D4F;
+  }
+  .spec-list svg{ width:22px; height:22px; color:var(--green); flex-shrink:0; margin-top:1px;}
+  .spec-list strong{ font-weight:700; color:var(--ink);}
+
+  /* ---------- lokasi ---------- */
+  .lokasi-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:stretch;}
+  .lokasi-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:var(--radius);
+    padding:36px;
+  }
+  .lokasi-card h3{ font-family:'Plus Jakarta Sans'; text-transform:none; font-weight:800; font-size:19px; letter-spacing:0; margin-bottom:18px; color:var(--amber);}
+  .lokasi-row{ display:flex; gap:14px; align-items:flex-start; margin-bottom:20px; }
+  .lokasi-row svg{ width:22px; height:22px; flex-shrink:0; color:var(--amber); margin-top:2px;}
+  .lokasi-row div b{ display:block; font-size:14.5px; margin-bottom:3px; color:white;}
+  .lokasi-row div span{ font-size:14.5px; color:#B9C8D6; line-height:1.55;}
+  .map-frame{
+    border-radius:var(--radius);
+    overflow:hidden;
+    position:relative;
+    min-height:340px;
+    border:1px solid rgba(255,255,255,.14);
+  }
+  .map-frame svg{ width:100%; height:100%; position:absolute; inset:0;}
+  .map-pin{
+    position:absolute; top:48%; left:46%; transform:translate(-50%,-100%);
+    display:flex; flex-direction:column; align-items:center;
+    animation: pin-drop 2.4s ease-in-out infinite;
+  }
+  @keyframes pin-drop{ 0%,100%{ transform:translate(-50%,-100%) translateY(0);} 50%{ transform:translate(-50%,-100%) translateY(-10px);} }
+  .map-pin svg{ width:38px; height:38px; color:var(--red); filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));}
+  .map-label{
+    margin-top:10px; background:white; color:var(--ink); font-size:11.5px; font-weight:700;
+    padding:6px 12px; border-radius:999px; white-space:nowrap; box-shadow:var(--shadow);
+  }
+
+  /* ---------- testimoni ---------- */
+  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .testi-card{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; display:flex; flex-direction:column; gap:16px;
+    transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .testi-card:hover{ transform:translateY(-6px) rotate(-.4deg); box-shadow:var(--shadow);}
+  .stars{ display:flex; gap:3px;}
+  .stars svg{ width:16px; height:16px; color:var(--amber);}
+  .testi-card p{ font-size:15px; line-height:1.65; color:#2A3D4F; flex-grow:1;}
+  .testi-person{ display:flex; align-items:center; gap:12px; }
+  .avatar{
+    width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'Anton'; font-size:16px; color:white; flex-shrink:0;
+  }
+  .testi-person b{ display:block; font-size:14px;}
+  .testi-person span{ font-size:12.5px; color:#7A8C9C;}
+
+  /* ---------- cta strip ---------- */
+  .cta-strip{
+    background:var(--green);
+    border-radius:28px;
+    padding:60px 50px;
+    display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap;
+    color:white;
+    position:relative; overflow:hidden;
+  }
+  .cta-strip::before{
+    content:""; position:absolute; width:300px; height:300px; border-radius:50%;
+    background:rgba(255,255,255,.08); top:-120px; right:-80px;
+  }
+  .cta-strip h2{ font-size:clamp(28px,4vw,40px); max-width:480px; position:relative; z-index:1;}
+  .cta-strip .btn-primary{ background:white; color:var(--green-deep); position:relative; z-index:1;}
+  .cta-strip .btn-primary:hover{ box-shadow:0 18px 34px -8px rgba(0,0,0,.35); }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--ink); color:#9FB2C2; padding:54px 0 28px; }
+  .foot-grid{ display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; padding-bottom:34px; border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:24px;}
+  .foot-logo{ display:flex; align-items:center; gap:10px; font-family:'Anton'; font-size:19px; color:white; margin-bottom:10px;}
+  .foot-grid p{ font-size:13.5px; max-width:280px; line-height:1.6;}
+  .foot-col h4{ font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:white; margin-bottom:14px;}
+  .foot-col div{ font-size:13.5px; line-height:2; }
+  .foot-bottom{ display:flex; justify-content:space-between; font-size:12.5px; flex-wrap:wrap; gap:10px;}
+
+  /* ---------- floating whatsapp ---------- */
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:80;
+    width:64px; height:64px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px -8px rgba(37,211,102,.6);
+    animation: pulse-wa 2.6s ease-in-out infinite;
+  }
+  .wa-float svg{ width:32px; height:32px; color:white;}
+  @keyframes pulse-wa{
+    0%,100%{ box-shadow:0 14px 30px -8px rgba(37,211,102,.6); transform:scale(1);}
+    50%{ box-shadow:0 14px 38px -4px rgba(37,211,102,.85); transform:scale(1.06);}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+
+  @media (max-width:980px){
+    .hero-grid, .product-wrap, .lokasi-wrap{ grid-template-columns:1fr; }
+    .product-wrap{ display:flex; flex-direction:column-reverse; }
+    .feature-grid, .testi-grid{ grid-template-columns:1fr 1fr; }
+    .nav-links{ display:none; }
+    .cta-strip{ flex-direction:column; text-align:center; justify-content:center;}
+  }
+  @media (max-width:620px){
+    .feature-grid, .testi-grid{ grid-template-columns:1fr; }
+    .hero{ padding-top:140px; }
+    .hero-meta{ gap:18px; }
+    .nav-cta .btn span{ display:none; }
+    .wrap{ padding:0 20px; }
+    .lokasi-card{ padding:26px; }
+    .cta-strip{ padding:42px 26px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="scrollbar"></div>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <a href="#beranda" class="logo">
+        <svg class="tank-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="14" y="6" width="10" height="6" rx="2" fill="#D6483F"/>
+          <path d="M10 16c0-3 3-5 14-5s14 2 14 5v20c0 4-6 7-14 7s-14-3-14-7V16z" fill="#2E7D4F"/>
+          <ellipse cx="24" cy="16" rx="14" ry="4.2" fill="#3C9460"/>
+        </svg>
+        Pangkalan Dazam
+      </a>
+      <ul class="nav-links">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#produk">Produk</a></li>
+        <li><a href="#lokasi">Lokasi</a></li>
+        <li><a href="#testimoni">Testimoni</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-primary" id="navWa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.3c-.22.62-1.27 1.18-1.75 1.25-.45.07-1 .1-1.62-.1-.37-.12-.85-.27-1.46-.53-2.57-1.1-4.24-3.7-4.37-3.87-.13-.18-1.05-1.4-1.05-2.67 0-1.27.66-1.9.9-2.16.23-.26.5-.32.67-.32.17 0 .34 0 .48.01.16.01.36-.06.56.43.22.53.74 1.83.8 1.96.07.13.11.28.02.46-.09.18-.13.28-.27.43-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.81.86.27.13.45.2.51.31.07.12.07.68-.15 1.3z"/></svg>
+          <span>Pesan Sekarang</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section id="beranda" class="hero">
+    <div class="hero-blob blob-a"></div>
+    <div class="hero-blob blob-b"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow reveal">Pangkalan LPG 3 Kg · Pekanbaru</span>
+        <h1 class="reveal">Pangkalan<br><span>Dazam</span></h1>
+        <p class="lead reveal">Khusus jual gas melon 3 Kg. Tinggal chat WhatsApp, tabung siap diambil atau diantar ke rumah — tanpa antre, tanpa ribet.</p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary" id="heroWa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.3c-.22.62-1.27 1.18-1.75 1.25-.45.07-1 .1-1.62-.1-.37-.12-.85-.27-1.46-.53-2.57-1.1-4.24-3.7-4.37-3.87-.13-.18-1.05-1.4-1.05-2.67 0-1.27.66-1.9.9-2.16.23-.26.5-.32.67-.32.17 0 .34 0 .48.01.16.01.36-.06.56.43.22.53.74 1.83.8 1.96.07.13.11.28.02.46-.09.18-.13.28-.27.43-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.81.86.27.13.45.2.51.31.07.12.07.68-.15 1.3z"/></svg>
+            Chat WhatsApp Sekarang
+          </a>
+          <a href="#produk" class="btn btn-ghost">Lihat Produk</a>
+        </div>
+        <div class="hero-meta reveal">
+          <div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <div><strong>Lokasi</strong>Jl. Dirgantara, Gg. 12 Desember No. 5, Pekanbaru</div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><strong>Buka Setiap Hari</strong>Stok dicek & diisi ulang rutin</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal scale">
+        <div class="badge-resmi">PANGKALAN<br>RESMI<br>★ 3 KG ★</div>
+        <svg class="tank-float" width="300" height="380" viewBox="0 0 300 380" fill="none">
+          <ellipse cx="150" cy="360" rx="80" ry="14" fill="#0F2A43" opacity="0.12"/>
+          <rect x="128" y="18" width="44" height="34" rx="8" fill="#D6483F"/>
+          <rect x="138" y="2" width="24" height="20" rx="5" fill="#A6332C"/>
+          <path d="M60 70c0-22 40-32 90-32s90 10 90 32v230c0 30-40 50-90 50s-90-20-90-50V70z" fill="#2E7D4F"/>
+          <path d="M60 70c0-22 40-32 90-32s90 10 90 32" fill="#3C9460"/>
+          <rect x="60" y="150" width="180" height="56" fill="#1F5C39" opacity=".55"/>
+          <text x="150" y="190" text-anchor="middle" font-family="Anton" font-size="42" fill="#FBF6EA">3 KG</text>
+          <path d="M60 250c0 0 30 14 90 14s90-14 90-14" stroke="#1F5C39" stroke-width="4" fill="none" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <svg class="zig" viewBox="0 0 1200 46" preserveAspectRatio="none">
+    <path d="M0 46 L0 18 L30 38 L60 18 L90 38 L120 18 L150 38 L180 18 L210 38 L240 18 L270 38 L300 18 L330 38 L360 18 L390 38 L420 18 L450 38 L480 18 L510 38 L540 18 L570 38 L600 18 L630 38 L660 18 L690 38 L720 18 L750 38 L780 18 L810 38 L840 18 L870 38 L900 18 L930 38 L960 18 L990 38 L1020 18 L1050 38 L1080 18 L1110 38 L1140 18 L1170 38 L1200 18 L1200 46 Z" fill="#1C5DA6"/>
+  </svg>
+
+  <!-- ================= ABOUT / FEATURES ================= -->
+  <section id="kenapa" style="padding-top:64px;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Kenapa Pangkalan Dazam</span>
+        <h2>Fokus Satu Produk,<br>Pelayanan Tetap Penuh</h2>
+        <p>Kami hanya jual satu hal — gas LPG 3 Kg bersubsidi — supaya stok selalu terjaga dan warga sekitar Jl. Dirgantara nggak perlu pusing cari ke mana-mana.</p>
+      </div>
+      <div class="feature-grid stagger">
+        <div class="feature-card reveal" style="--i:0">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2H4a1 1 0 00-1 1v11a2 2 0 002 2h14a2 2 0 002-2V8a1 1 0 00-1-1zM9 5h6v2H9z"/></svg></div>
+          <h3>Stok Selalu Tersedia</h3>
+          <p>Pengisian ulang rutin tiap minggu jadi kemungkinan kehabisan tabung sangat kecil.</p>
+        </div>
+        <div class="feature-card reveal" style="--i:1">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Harga Sesuai HET</h3>
+          <p>Jual dengan harga eceran tertinggi yang berlaku, transparan, tanpa biaya tersembunyi.</p>
+        </div>
+        <div class="feature-card reveal" style="--i:2">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></div>
+          <h3>Pesan via WhatsApp</h3>
+          <p>Tinggal chat, konfirmasi, lalu ambil atau diantar — tanpa perlu telepon atau datang dulu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUK ================= -->
+  <section id="produk" style="background:var(--paper-dim);">
+    <div class="wrap product-wrap">
+      <div class="product-visual reveal scale">
+        <div class="price-tag">HET RESMI<small>Sesuai Ketetapan</small></div>
+        <svg width="260" height="330" viewBox="0 0 300 380" fill="none">
+          <ellipse cx="150" cy="360" rx="80" ry="14" fill="#0F2A43" opacity="0.1"/>
+          <rect x="128" y="18" width="44" height="34" rx="8" fill="#D6483F"/>
+          <rect x="138" y="2" width="24" height="20" rx="5" fill="#A6332C"/>
+          <path d="M60 70c0-22 40-32 90-32s90 10 90 32v230c0 30-40 50-90 50s-90-20-90-50V70z" fill="#2E7D4F"/>
+          <path d="M60 70c0-22 40-32 90-32s90 10 90 32" fill="#3C9460"/>
+          <rect x="60" y="150" width="180" height="56" fill="#1F5C39" opacity=".55"/>
+          <text x="150" y="190" text-anchor="middle" font-family="Anton" font-size="42" fill="#FBF6EA">3 KG</text>
+        </svg>
+        <svg class="flame-wrap" viewBox="0 0 40 60" fill="none">
+          <path d="M20 2c4 10-6 12-6 22a10 10 0 0020 0c0-6-4-8-4-14 0 6-3 7-3 12a4 4 0 01-8 0c0-9 3-12 1-20z" fill="url(#flameGrad)"/>
+          <defs><linearGradient id="flameGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F4A227"/><stop offset="100%" stop-color="#D6483F"/>
+          </linearGradient></defs>
+        </svg>
+      </div>
+      <div class="product-info">
+        <span class="eyebrow reveal right">Satu-satunya Produk Kami</span>
+        <h2 class="reveal right">Tabung LPG<br>3 Kg "Gas Melon"</h2>
+        <p class="desc reveal right">Kami sengaja hanya fokus jual gas 3 Kg bersubsidi — bukan jualan campuran — supaya kualitas tabung, segel, dan ketersediaan stok bisa kami jaga betul.</p>
+        <ul class="spec-list reveal right">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span><strong>Berat bersih 3 Kg</strong> — untuk kebutuhan rumah tangga & usaha mikro</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span><strong>Segel & kondisi tabung terjamin</strong> sebelum sampai ke tangan pembeli</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span><strong>Tukar tabung kosong</strong> langsung di tempat, proses cepat</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span><strong>Bisa diambil atau dianter</strong> untuk area sekitar Jl. Dirgantara</span></li>
+        </ul>
+        <a class="btn btn-primary reveal right" id="produkWa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.3c-.22.62-1.27 1.18-1.75 1.25-.45.07-1 .1-1.62-.1-.37-.12-.85-.27-1.46-.53-2.57-1.1-4.24-3.7-4.37-3.87-.13-.18-1.05-1.4-1.05-2.67 0-1.27.66-1.9.9-2.16.23-.26.5-.32.67-.32.17 0 .34 0 .48.01.16.01.36-.06.56.43.22.53.74 1.83.8 1.96.07.13.11.28.02.46-.09.18-.13.28-.27.43-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.81.86.27.13.45.2.51.31.07.12.07.68-.15 1.3z"/></svg>
+          Tanya Stok via WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <svg class="zig" viewBox="0 0 1200 46" preserveAspectRatio="none" style="transform:rotate(180deg); background:var(--paper-dim);">
+    <path d="M0 46 L0 18 L30 38 L60 18 L90 38 L120 18 L150 38 L180 18 L210 38 L240 18 L270 38 L300 18 L330 38 L360 18 L390 38 L420 18 L450 38 L480 18 L510 38 L540 18 L570 38 L600 18 L630 38 L660 18 L690 38 L720 18 L750 38 L780 18 L810 38 L840 18 L870 38 L900 18 L930 38 L960 18 L990 38 L1020 18 L1050 38 L1080 18 L1110 38 L1140 18 L1170 38 L1200 18 L1200 46 Z" fill="#0F2A43"/>
+  </svg>
+
+  <!-- ================= LOKASI ================= -->
+  <section id="lokasi" class="section-dark">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="color:var(--amber);">Datang Langsung / Order Online</span>
+        <h2>Titik Lokasi Pangkalan</h2>
+        <p>Bisa ambil langsung di tempat atau order lewat WhatsApp dulu biar nggak bolak-balik kalau stok lagi kosong.</p>
+      </div>
+      <div class="lokasi-wrap">
+        <div class="lokasi-card reveal left">
+          <h3>Informasi Kontak</h3>
+          <div class="lokasi-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <div><b>Alamat</b><span>Jl. Dirgantara, Gg. 12 Desember No. 5,<br>Pekanbaru, Riau</span></div>
+          </div>
+          <div class="lokasi-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            <div><b>WhatsApp</b><span>0813-6543-7925 — klik tombol di bawah untuk chat langsung</span></div>
+          </div>
+          <div class="lokasi-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><b>Jam Layanan</b><span>Setiap hari, selama stok tersedia</span></div>
+          </div>
+          <a class="btn btn-primary" id="lokasiWa" target="_blank" rel="noopener" style="margin-top:8px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.3c-.22.62-1.27 1.18-1.75 1.25-.45.07-1 .1-1.62-.1-.37-.12-.85-.27-1.46-.53-2.57-1.1-4.24-3.7-4.37-3.87-.13-.18-1.05-1.4-1.05-2.67 0-1.27.66-1.9.9-2.16.23-.26.5-.32.67-.32.17 0 .34 0 .48.01.16.01.36-.06.56.43.22.53.74 1.83.8 1.96.07.13.11.28.02.46-.09.18-.13.28-.27.43-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.81.86.27.13.45.2.51.31.07.12.07.68-.15 1.3z"/></svg>
+            Chat Sekarang
+          </a>
+        </div>
+        <div class="map-frame reveal right">
+          <svg viewBox="0 0 500 380" preserveAspectRatio="xMidYMid slice">
+            <rect width="500" height="380" fill="#16395E"/>
+            <g stroke="#234D77" stroke-width="2">
+              <line x1="0" y1="60" x2="500" y2="60"/><line x1="0" y1="130" x2="500" y2="130"/>
+              <line x1="0" y1="210" x2="500" y2="210"/><line x1="0" y1="290" x2="500" y2="290"/>
+              <line x1="70" y1="0" x2="70" y2="380"/><line x1="180" y1="0" x2="180" y2="380"/>
+              <line x1="300" y1="0" x2="300" y2="380"/><line x1="420" y1="0" x2="420" y2="380"/>
+            </g>
+            <path d="M0 170 Q150 150 250 190 T500 200" stroke="#F4A227" stroke-width="5" fill="none" opacity=".85"/>
+            <rect x="190" y="150" width="60" height="40" fill="#2E7D4F" opacity=".5" rx="4"/>
+            <rect x="260" y="220" width="50" height="36" fill="#2E7D4F" opacity=".35" rx="4"/>
+          </svg>
+          <div class="map-pin">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C7 0 3 4 3 9c0 6.5 9 15 9 15s9-8.5 9-15c0-5-4-9-9-9zm0 12.5A3.5 3.5 0 1112 5.5a3.5 3.5 0 010 7z"/></svg>
+            <span class="map-label">Pangkalan Dazam</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONI ================= -->
+  <section id="testimoni">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Kata Mereka</span>
+        <h2>Kesan dari Pelanggan</h2>
+        <p>Beberapa pesan yang masuk dari warga sekitar yang sudah langganan ambil gas di Pangkalan Dazam.</p>
+      </div>
+      <div class="testi-grid stagger">
+
+        <div class="testi-card reveal" style="--i:0">
+          <div class="stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+          </div>
+          <p>"Tinggal chat WA, langsung dibalas cepat. Gas selalu ada, nggak pernah kosong pas saya butuh."</p>
+          <div class="testi-person">
+            <div class="avatar" style="background:#2E7D4F;">R</div>
+            <div><b>Bu Ratna</b><span>Warga Jl. Dirgantara</span></div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="--i:1">
+          <div class="stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+          </div>
+          <p>"Harganya pas, sesuai harga resmi. Petugasnya juga ramah, tabung dicek dulu sebelum dikasih."</p>
+          <div class="testi-person">
+            <div class="avatar" style="background:#1C5DA6;">D</div>
+            <div><b>Pak Dedi</b><span>Pemilik warung kecil</span></div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="--i:2">
+          <div class="stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 6.3 6.4.5-5 4.3 1.6 6.4-5.6-3.6L4.4 18.5 6 12.1 1 7.8l6.4-.5z"/></svg>
+          </div>
+          <p>"Deket dari rumah, lokasinya gampang ditemukan di gang. Sekarang jadi langganan tetap di sini."</p>
+          <div class="testi-person">
+            <div class="avatar" style="background:#F4A227;">S</div>
+            <div><b>Siti A.</b><span>Ibu rumah tangga</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="cta-strip reveal scale">
+        <h2>Gas Mau Habis?<br>Chat Sekarang, Beres Hari Ini.</h2>
+        <a class="btn btn-primary" id="ctaWa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.3c-.22.62-1.27 1.18-1.75 1.25-.45.07-1 .1-1.62-.1-.37-.12-.85-.27-1.46-.53-2.57-1.1-4.24-3.7-4.37-3.87-.13-.18-1.05-1.4-1.05-2.67 0-1.27.66-1.9.9-2.16.23-.26.5-.32.67-.32.17 0 .34 0 .48.01.16.01.36-.06.56.43.22.53.74 1.83.8 1.96.07.13.11.28.02.46-.09.18-.13.28-.27.43-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.81.86.27.13.45.2.51.31.07.12.07.68-.15 1.3z"/></svg>
+          Pesan via WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <svg width="26" height="26" viewBox="0 0 48 48" fill="none">
+            <rect x="14" y="6" width="10" height="6" rx="2" fill="#D6483F"/>
+            <path d="M10 16c0-3 3-5 14-5s14 2 14 5v20c0 4-6 7-14 7s-14-3-14-7V16z" fill="#2E7D4F"/>
+            <ellipse cx="24" cy="16" rx="14" ry="4.2" fill="#3C9460"/>
+          </svg>
+          Pangkalan Dazam
+        </div>
+        <p>Pangkalan gas LPG 3 Kg di Pekanbaru. Hanya satu produk, satu fokus: gas Anda selalu ada saat dibutuhkan.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Kontak</h4>
+        <div>
+          WhatsApp: 0813-6543-7925<br>
+          Jl. Dirgantara, Gg. 12 Desember No. 5<br>
+          Pekanbaru, Riau
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Jelajahi</h4>
+        <div>
+          <a href="#beranda">Beranda</a><br>
+          <a href="#produk">Produk</a><br>
+          <a href="#lokasi">Lokasi</a><br>
+          <a href="#testimoni">Testimoni</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pangkalan Dazam. Seluruh hak cipta dilindungi.</span>
+      <span>Dibuat dengan ❤ untuk warga Jl. Dirgantara & sekitarnya.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" id="floatWa" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.3c-.22.62-1.27 1.18-1.75 1.25-.45.07-1 .1-1.62-.1-.37-.12-.85-.27-1.46-.53-2.57-1.1-4.24-3.7-4.37-3.87-.13-.18-1.05-1.4-1.05-2.67 0-1.27.66-1.9.9-2.16.23-.26.5-.32.67-.32.17 0 .34 0 .48.01.16.01.36-.06.56.43.22.53.74 1.83.8 1.96.07.13.11.28.02.46-.09.18-.13.28-.27.43-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.81.86.27.13.45.2.51.31.07.12.07.68-.15 1.3z"/></svg>
+</a>
+
+<script>
+  // ---- WhatsApp links ----
+  const waNumber = "6281365437925";
+  const waMsg = encodeURIComponent("Halo Pangkalan Dazam, saya mau pesan gas LPG 3 Kg.");
+  const waLink = `https://wa.me/${waNumber}?text=${waMsg}`;
+  document.querySelectorAll('#navWa,#heroWa,#produkWa,#lokasiWa,#ctaWa,#floatWa').forEach(el=>{
+    el.href = waLink;
+  });
+
+  // ---- scroll progress bar ----
+  const bar = document.getElementById('scrollbar');
+  function updateBar(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = scrolled + '%';
+  }
+  document.addEventListener('scroll', updateBar, {passive:true});
+
+  // ---- header shrink ----
+  const header = document.getElementById('siteHeader');
+  function updateHeader(){
+    if(window.scrollY > 30) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  }
+  document.addEventListener('scroll', updateHeader, {passive:true});
+  updateHeader(); updateBar();
+
+  // ---- reveal on scroll (both directions) ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+      } else {
+        entry.target.classList.remove('in-view');
+      }
+    });
+  }, { threshold:0.15, rootMargin:"-40px 0px -40px 0px" });
+  revealEls.forEach(el=> io.observe(el));
+
+  // ---- smooth nav close on mobile (anchor scroll already smooth via CSS) ----
+</script>
+
+</body>
+</html>
